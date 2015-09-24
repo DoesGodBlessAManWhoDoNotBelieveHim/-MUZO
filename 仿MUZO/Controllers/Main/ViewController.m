@@ -8,7 +8,18 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+#import "FSAudioStream.h"
+
+#import "FSPlaylistItem.h"
+
+@interface ViewController (){
+    NSArray *allUrls;
+    NSInteger currentIndex;
+    
+    FSPlaylistItem *playListItem;
+}
+
+@property (strong, nonatomic) FSAudioStream *audioStream;
 
 @end
 
@@ -16,8 +27,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
 }
+
+
+#pragma mark - IBAction
+- (IBAction)_setSongFavorite:(UIButton *)sender {
+}
+- (IBAction)_showSongsList:(UIButton *)sender {
+}
+- (IBAction)_setRepeatType:(UIButton *)sender {
+}
+- (IBAction)_preSongAction:(id)sender {
+    }
+- (IBAction)_playOrPauseAction:(id)sender {
+    }
+- (IBAction)_nextSongAction:(id)sender {
+    
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

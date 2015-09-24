@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 
+
 @interface AppDelegate ()
 
 @end
@@ -17,6 +18,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *homeDirectory = [NSHomeDirectory() stringByAppendingString:@"/Documents"];
+    NSLog(@"homeDirectory:%@",homeDirectory);
+    NSString *localM3uPath = [homeDirectory stringByAppendingString:@"/local.m3u"];
+    NSURL *rainMp3Url = [[NSBundle mainBundle]URLForResource:@"TheRain" withExtension:@"mp3"];
+    NSURL *LYMp3Url = [[NSBundle mainBundle]URLForResource:@"LovingYou" withExtension:@"mp3"];
+    
+    NSData *contentsData = [[NSString stringWithFormat:@"%@\n%@",rainMp3Url,LYMp3Url] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [fileManager createFileAtPath:localM3uPath contents:contentsData attributes:nil];
+    //NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:localM3uPath];
+    
+    
     return YES;
 }
 
