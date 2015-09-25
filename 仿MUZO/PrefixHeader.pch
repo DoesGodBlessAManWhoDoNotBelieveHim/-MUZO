@@ -26,6 +26,9 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+
+    #import "SVProgressHUD.h"
+    #import "AppDelegate.h"
 #endif
 
 #endif

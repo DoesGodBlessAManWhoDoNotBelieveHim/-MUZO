@@ -22,6 +22,8 @@
     NSString *homeDirectory = [NSHomeDirectory() stringByAppendingString:@"/Documents"];
     NSLog(@"homeDirectory:%@",homeDirectory);
     NSString *localM3uPath = [homeDirectory stringByAppendingString:@"/local.m3u"];
+    self.localUrl = [NSURL fileURLWithPath:localM3uPath];
+    
     NSURL *rainMp3Url = [[NSBundle mainBundle]URLForResource:@"TheRain" withExtension:@"mp3"];
     NSURL *LYMp3Url = [[NSBundle mainBundle]URLForResource:@"LovingYou" withExtension:@"mp3"];
     

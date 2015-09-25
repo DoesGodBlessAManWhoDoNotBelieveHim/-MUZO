@@ -14,6 +14,8 @@
 		782A87021BAFFA2A0027F192 /* Her.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 782A86FE1BAFFA2A0027F192 /* Her.mp3 */; };
 		782A87031BAFFA2A0027F192 /* LovingYou.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 782A86FF1BAFFA2A0027F192 /* LovingYou.mp3 */; };
 		782A87041BAFFA2A0027F192 /* TheRain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 782A87001BAFFA2A0027F192 /* TheRain.mp3 */; };
+		784A121B1BB4E0B600921371 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 784A12181BB4E0B600921371 /* SVProgressHUD.bundle */; };
+		784A121C1BB4E0B600921371 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 784A121A1BB4E0B600921371 /* SVProgressHUD.m */; };
 		784A5ED41BB3F3E700144938 /* PlayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 784A5ED31BB3F3E700144938 /* PlayListViewController.m */; };
 		786B39821B9E808D0062FABF /* FSFrequencyDomainAnalyzer.m in Sources */ = {isa = PBXBuildFile; fileRef = 786B395A1B9E808D0062FABF /* FSFrequencyDomainAnalyzer.m */; };
 		786B39831B9E808D0062FABF /* FSFrequencyPlotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 786B395C1B9E808D0062FABF /* FSFrequencyPlotView.m */; };
@@ -78,6 +80,9 @@
 		782A86FE1BAFFA2A0027F192 /* Her.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Her.mp3; sourceTree = "<group>"; };
 		782A86FF1BAFFA2A0027F192 /* LovingYou.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LovingYou.mp3; sourceTree = "<group>"; };
 		782A87001BAFFA2A0027F192 /* TheRain.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TheRain.mp3; sourceTree = "<group>"; };
+		784A12181BB4E0B600921371 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		784A12191BB4E0B600921371 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		784A121A1BB4E0B600921371 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		784A5ED21BB3F3E700144938 /* PlayListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListViewController.h; sourceTree = "<group>"; };
 		784A5ED31BB3F3E700144938 /* PlayListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListViewController.m; sourceTree = "<group>"; };
 		786B39591B9E808D0062FABF /* FSFrequencyDomainAnalyzer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSFrequencyDomainAnalyzer.h; sourceTree = "<group>"; };
@@ -205,6 +210,16 @@
 				782A87001BAFFA2A0027F192 /* TheRain.mp3 */,
 			);
 			path = Musics;
+			sourceTree = "<group>";
+		};
+		784A12171BB4E0B600921371 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				784A12181BB4E0B600921371 /* SVProgressHUD.bundle */,
+				784A12191BB4E0B600921371 /* SVProgressHUD.h */,
+				784A121A1BB4E0B600921371 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 		786B39571B9E808D0062FABF /* FreeStreamer */ = {
@@ -399,6 +414,7 @@
 		78F370AF1B9D1EB700CA5BE7 /* 第三方库 */ = {
 			isa = PBXGroup;
 			children = (
+				784A12171BB4E0B600921371 /* SVProgressHUD */,
 				78D653BD1B9ED7BC00268C1A /* AFNetworkingFramework */,
 				786B39571B9E808D0062FABF /* FreeStreamer */,
 				786B397F1B9E808D0062FABF /* Reachability */,
@@ -524,6 +540,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				78F370941B9D1CE000CA5BE7 /* Main.storyboard in Resources */,
+				784A121B1BB4E0B600921371 /* SVProgressHUD.bundle in Resources */,
 				78F370991B9D1CE000CA5BE7 /* LaunchScreen.xib in Resources */,
 				782A87021BAFFA2A0027F192 /* Her.mp3 in Resources */,
 				782A87031BAFFA2A0027F192 /* LovingYou.mp3 in Resources */,
@@ -573,6 +590,7 @@
 				78D653F31B9ED7BC00268C1A /* UIProgressView+AFNetworking.m in Sources */,
 				786B398E1B9E808D0062FABF /* FSAudioStream.mm in Sources */,
 				786B39941B9E808D0062FABF /* Reachability.m in Sources */,
+				784A121C1BB4E0B600921371 /* SVProgressHUD.m in Sources */,
 				784A5ED41BB3F3E700144938 /* PlayListViewController.m in Sources */,
 				786B39861B9E808D0062FABF /* caching_stream.cpp in Sources */,
 				78D653EE1B9ED7BC00268C1A /* AFNetworkActivityIndicatorManager.m in Sources */,
