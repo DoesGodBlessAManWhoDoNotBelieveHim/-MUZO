@@ -18,7 +18,7 @@
 
 
 @interface ViewController ()<FSAudioControllerDelegate,PlayListViewControllerDelegate>{
-//    NSArray *allUrls;
+    NSArray *allUrls;
 //    NSInteger currentIndex;
     
     FSPlaylistItem *_playListItem;
@@ -99,6 +99,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSURL *rainMp3Url = [[NSBundle mainBundle]URLForResource:@"TheRain" withExtension:@"mp3"];
+    NSURL *LYMp3Url = [[NSBundle mainBundle]URLForResource:@"LovingYou" withExtension:@"mp3"];
+    NSURL *HERMp3Url = [[NSBundle mainBundle]URLForResource:@"Her" withExtension:@"mp3"];
+    allUrls = @[rainMp3Url,LYMp3Url,HERMp3Url];
     
     self.myVolumeView.showsVolumeSlider = NO;
     self.preSongBtn.hidden = YES;
@@ -273,15 +277,13 @@
 - (FSAudioController *)audionController{
     if (!_audionController) {
         _audionController = [[FSAudioController alloc] init];
-        NSURL *rainMp3Url = [[NSBundle mainBundle]URLForResource:@"TheRain" withExtension:@"mp3"];
-        NSURL *LYMp3Url = [[NSBundle mainBundle]URLForResource:@"LovingYou" withExtension:@"mp3"];
-        NSURL *HERMp3Url = [[NSBundle mainBundle]URLForResource:@"Her" withExtension:@"mp3"];
+        
         FSPlaylistItem *item1 = [[FSPlaylistItem alloc]init];
-        item1.url = rainMp3Url;
+        item1.url = allUrls[0];
         FSPlaylistItem *item2 = [[FSPlaylistItem alloc]init];
-        item2.url = LYMp3Url;
+        item2.url = allUrls[1];
         FSPlaylistItem *item3 = [[FSPlaylistItem alloc]init];
-        item3.url = HERMp3Url;
+        item3.url = allUrls[2];
         //[_audionController playFromPlaylist:@[item1,item2]];
         [_audionController addItem:item1];
         [_audionController addItem:item2];
@@ -456,8 +458,17 @@
 }
 
 - (void)didSelectedIndex:(NSInteger)index{
-    [self.audionController pause];
-    [self.audionController playItemAtIndex:index];
+    if ([self.audionController.currentPlaylistItem.url isEqual:allUrls[index]]) {
+        
+    }
+    else{
+        if (self.audionController.isPlaying) {
+            [self.audionController pause];
+        }
+        
+        [self.audionController playItemAtIndex:index];
+    }
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
