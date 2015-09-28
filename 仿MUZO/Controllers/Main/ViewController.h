@@ -18,6 +18,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *favoriteBtn;
 @property (strong, nonatomic) IBOutlet UIButton *showListBtn;
+@property (strong, nonatomic) IBOutlet UISlider *progressSlider;
 
 @property (strong, nonatomic) IBOutlet UILabel *currentProgressLabel;
 @property (strong, nonatomic) IBOutlet UIProgressView *progressView;

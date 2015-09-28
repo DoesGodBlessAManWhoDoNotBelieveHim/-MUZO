@@ -335,9 +335,9 @@ public:
             }
         }
         
-        if (self.configuration.automaticAudioSessionHandlingEnabled) {
+//        if (self.configuration.automaticAudioSessionHandlingEnabled) {
             [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-        }
+//        }
 #endif
         
 #if (__IPHONE_OS_VERSION_MIN_REQUIRED >= 60000)

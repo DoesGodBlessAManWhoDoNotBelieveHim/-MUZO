@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>BFAEBACF-D749-47F0-9860-1ADB7B3DB82B</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>WRTMusic</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>BBBE770754C6407E8B13AE3B68E9B4CF225A5D60</key>
 		<string>https://github.com/DoesGodBlessAManWhoDoNotBelieveHim/-MUZO.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>WRTMusic.xcodeproj/project.xcworkspace</string>
+	<string>WRTMusic.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>BBBE770754C6407E8B13AE3B68E9B4CF225A5D60</key>

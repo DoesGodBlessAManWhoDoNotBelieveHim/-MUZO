@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PlayListViewController : UIViewController
+@protocol PlayListViewControllerDelegate <NSObject>
 
+- (void)didSelectedIndex:(NSInteger)index;
+
+@end
+
+@interface PlayListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic, assign) id<PlayListViewControllerDelegate> delegate;
+
+@property (strong, nonatomic) IBOutlet UITableView *myTableView;
 @end

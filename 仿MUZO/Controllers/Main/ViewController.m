@@ -14,16 +14,17 @@
 
 #import "FSAudioController.h"
 
+#import "PlayListViewController.h"
 
 
-@interface ViewController ()<FSAudioControllerDelegate>{
+@interface ViewController ()<FSAudioControllerDelegate,PlayListViewControllerDelegate>{
 //    NSArray *allUrls;
 //    NSInteger currentIndex;
     
     FSPlaylistItem *_playListItem;
     FSPlaylistItem *_selectedPlaylistItem;
     
-    FSAudioController *_audionController;
+    //FSAudioController *_audionController;
     
     FSStreamConfiguration *_configuration;
     
@@ -84,12 +85,22 @@
 
 @implementation ViewController
 
-
-
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    //self.nextSongBtn.hidden = YES;
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.myVolumeView.showsVolumeSlider = NO;
     self.preSongBtn.hidden = YES;
     
     self.stationUrl = nil;
@@ -109,7 +120,7 @@
             case kFsAudioStreamStopped:{
                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                 if ([SVProgressHUD isVisible]) {
-                   [SVProgressHUD dismiss];
+                    [SVProgressHUD dismiss];
                 }
                 weakSelf.paused = NO;
                 [weakSelf.playOrPauseSongBtn setImage:[UIImage imageNamed:@"playBtn"] forState:UIControlStateNormal];
@@ -145,6 +156,7 @@
                 break;
             case kFsAudioStreamPlaying:{
                 [weakSelf determineStationNameWithMetaData:nil];
+                weakSelf.progressSlider.enabled = YES;
                 [SVProgressHUD dismiss];
                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
                 if (!weakSelf.progressUpdateTimer) {
@@ -164,10 +176,16 @@
                 break;
             case kFsAudioStreamPlaybackCompleted:{
                 [weakSelf toggleNextPreviousButtons];
+//                if ([weakSelf.audionController hasNextItem]) {
+//                    //[weakSelf.audionController playNextItem];
+//                }
+//                else{
+//                    [weakSelf.audionController playPreviousItem];
+//                }
             }
                 break;
             case kFsAudioStreamRetryingStarted:{
-                
+                //[weakSelf toggleNextPreviousButtons];
             }
                 break;
             case kFsAudioStreamRetryingSucceeded:{
@@ -245,35 +263,29 @@
         weakSelf.title = streamInfo;
     };
     
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+    // 这里可以先判断是否进入自动播放
+    [self.audionController play];
     
     _progressUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updatePlaybackProgress) userInfo:nil repeats:YES];
+    
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-//    FSPlaylistItem *playListItem = [[FSPlaylistItem alloc]init];
-//    playListItem.url = ((AppDelegate *)[UIApplication sharedApplication].delegate).localUrl;
-//    playListItem.originatingUrl = ((AppDelegate *)[UIApplication sharedApplication].delegate).localUrl;
-//    //self.audionController.activeStream.strictContentTypeChecking = NO;
-//    [self setPlayListItem:playListItem];
-//    [self setSelectedPlaylistItem:playListItem];
-}
-
-- (FSAudioController *)audioController
-{
+- (FSAudioController *)audionController{
     if (!_audionController) {
         _audionController = [[FSAudioController alloc] init];
         NSURL *rainMp3Url = [[NSBundle mainBundle]URLForResource:@"TheRain" withExtension:@"mp3"];
         NSURL *LYMp3Url = [[NSBundle mainBundle]URLForResource:@"LovingYou" withExtension:@"mp3"];
+        NSURL *HERMp3Url = [[NSBundle mainBundle]URLForResource:@"Her" withExtension:@"mp3"];
         FSPlaylistItem *item1 = [[FSPlaylistItem alloc]init];
         item1.url = rainMp3Url;
         FSPlaylistItem *item2 = [[FSPlaylistItem alloc]init];
         item2.url = LYMp3Url;
-        [_audionController playFromPlaylist:@[item1,item2]];
+        FSPlaylistItem *item3 = [[FSPlaylistItem alloc]init];
+        item3.url = HERMp3Url;
+        //[_audionController playFromPlaylist:@[item1,item2]];
+        [_audionController addItem:item1];
+        [_audionController addItem:item2];
+        [_audionController addItem:item3];
         _audionController.delegate = self;
     }
     return _audionController;
@@ -284,7 +296,7 @@
     if (metaData[@"IcecastStationName"] && [metaData[@"IcecastStationName"] length] > 0) {
         self.navigationController.navigationBar.topItem.title = metaData[@"IcecastStationName"];
     } else {
-        FSPlaylistItem *playlistItem = self.audioController.currentPlaylistItem;
+        FSPlaylistItem *playlistItem = self.audionController.currentPlaylistItem;
         NSString *title = playlistItem.title;
         
         if ([playlistItem.title length] > 0) {
@@ -300,12 +312,12 @@
 
 -(void)toggleNextPreviousButtons
 {
-    if([self.audioController hasNextItem] || [self.audioController hasPreviousItem])
+    if([self.audionController hasNextItem] || [self.audionController hasPreviousItem])
     {
         self.nextSongBtn.hidden = NO;
         self.preSongBtn.hidden = NO;
-        self.nextSongBtn.enabled = [self.audioController hasNextItem];
-        self.preSongBtn.enabled = [self.audioController hasPreviousItem];
+        self.nextSongBtn.enabled = [self.audionController hasNextItem];
+        self.preSongBtn.enabled = [self.audionController hasPreviousItem];
     }
     else
     {
@@ -326,9 +338,9 @@
     self.navigationItem.title = self.selectedPlaylistItem.title;
     
     if (self.selectedPlaylistItem.url) {
-        self.audioController.url =  self.selectedPlaylistItem.url;
+        self.audionController.url =  self.selectedPlaylistItem.url;
     } else if (self.selectedPlaylistItem.originatingUrl) {
-        self.audioController.url = self.selectedPlaylistItem.originatingUrl;
+        self.audionController.url = self.selectedPlaylistItem.originatingUrl;
     }
 }
 
@@ -337,38 +349,39 @@
     FSStreamPosition pos = {0};
     pos.position = _seekToPoint;
     
-    [self.audioController.activeStream seekToPosition:pos];
+    [self.audionController.activeStream seekToPosition:pos];
 }
 
 - (void)updatePlaybackProgress
 {
-    if (self.audioController.activeStream.continuous) {
-        //self.progressSlider.enabled = NO;
+    if (self.audionController.activeStream.continuous) {
+        self.progressSlider.enabled = NO;
         self.progressView.progress = 0;
-        //self.currentPlaybackTime.text = @"";
+        self.currentProgressLabel.text = @"";
+        self.songFullTimeLabel.text = @"";
     } else {
-        //self.progressSlider.enabled = YES;
+        self.progressSlider.enabled = YES;
         
-        FSStreamPosition cur = self.audioController.activeStream.currentTimePlayed;
-        FSStreamPosition end = self.audioController.activeStream.duration;
+        FSStreamPosition cur = self.audionController.activeStream.currentTimePlayed;
+        FSStreamPosition end = self.audionController.activeStream.duration;
         
         self.progressView.progress = cur.position;
+        self.progressSlider.value = cur.position;
         
-        //self.currentPlaybackTime.text = [NSString stringWithFormat:@"%i:%02i / %i:%02i",
-//                                         cur.minute, cur.second,
-//                                         end.minute, end.second];
+        self.currentProgressLabel.text = [NSString stringWithFormat:@"%i:%02i",cur.minute, cur.second];
+        self.songFullTimeLabel.text = [NSString stringWithFormat:@"%i:%02i",end.minute, end.second];
     }
     
     //self.bufferingIndicator.hidden = NO;
     //self.prebufferStatus.hidden = YES;
     
-    if (self.audioController.activeStream.contentLength > 0) {
+    if (self.audionController.activeStream.contentLength > 0) {
         // A non-continuous stream, show the buffering progress within the whole file
-        FSSeekByteOffset currentOffset = self.audioController.activeStream.currentSeekByteOffset;
+        FSSeekByteOffset currentOffset = self.audionController.activeStream.currentSeekByteOffset;
         
-        UInt64 totalBufferedData = currentOffset.start + self.audioController.activeStream.prebufferedByteCount;
+        UInt64 totalBufferedData = currentOffset.start + self.audionController.activeStream.prebufferedByteCount;
         
-        float bufferedDataFromTotal = (float)totalBufferedData / self.audioController.activeStream.contentLength;
+        float bufferedDataFromTotal = (float)totalBufferedData / self.audionController.activeStream.contentLength;
         
         //self.bufferingIndicator.progress = (float)currentOffset.start / self.audioController.activeStream.contentLength;
         
@@ -389,7 +402,24 @@
 #pragma mark - IBAction
 - (IBAction)_setSongFavorite:(UIButton *)sender {
 }
+
+- (IBAction)seekoffset:(UISlider *)sender {
+    _seekToPoint = self.progressSlider.value;
+    [_progressUpdateTimer invalidate];
+    _progressUpdateTimer = nil;
+    
+    [_playbackSeekTimer invalidate];
+    _playbackSeekTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(seekToNewTime) userInfo:nil repeats:NO];
+}
+
+- (void)seekToNewTime{
+    self.progressSlider.enabled = NO;
+    
+    [self doSeeking];
+}
+
 - (IBAction)_showSongsList:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"showSongList" sender:self];
 }
 - (IBAction)_setRepeatType:(UIButton *)sender {
 }
@@ -397,12 +427,14 @@
     [self.audionController playPreviousItem];
     }
 - (IBAction)_playOrPauseAction:(id)sender {
-    if (self.paused) {
+    if (self.audionController.isPlaying) {
         [self.audionController pause];
-        self.paused = NO;
+        [self.playOrPauseSongBtn setImage:[UIImage imageNamed:@"playBtn"] forState:UIControlStateNormal];
+        self.paused = YES;
     }
     else{
-        [self.audionController play];
+        [self.audionController pause];
+        [self.playOrPauseSongBtn setImage:[UIImage imageNamed:@"pauseBtn"] forState:UIControlStateNormal];
     }
 }
 - (IBAction)_nextSongAction:(id)sender {
@@ -421,6 +453,19 @@
     // We could do some fine-grained control here depending on the connectivity status, for example.
     // Allow all preloads for now.
     return YES;
+}
+
+- (void)didSelectedIndex:(NSInteger)index{
+    [self.audionController pause];
+    [self.audionController playItemAtIndex:index];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"showSongList"]) {
+        UINavigationController *nVC = [segue destinationViewController];
+        PlayListViewController *plVC = (PlayListViewController *)nVC.topViewController;
+        plVC.delegate = self;
+    }
 }
 
 @end

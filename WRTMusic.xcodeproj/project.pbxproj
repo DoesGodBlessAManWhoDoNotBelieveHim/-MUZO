@@ -10,7 +10,6 @@
 		78298D3D1BB0DC200062D77E /* example-rss-feed.xml in Resources */ = {isa = PBXBuildFile; fileRef = 78298D3C1BB0DC200062D77E /* example-rss-feed.xml */; };
 		782A86F81BAFDFC60027F192 /* MyNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 782A86F71BAFDFC60027F192 /* MyNavigationController.m */; };
 		782A86FB1BAFF9390027F192 /* TranslucentNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 782A86FA1BAFF9390027F192 /* TranslucentNavigationBar.m */; };
-		782A87011BAFFA2A0027F192 /* 3girls.m4r in Resources */ = {isa = PBXBuildFile; fileRef = 782A86FD1BAFFA2A0027F192 /* 3girls.m4r */; };
 		782A87021BAFFA2A0027F192 /* Her.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 782A86FE1BAFFA2A0027F192 /* Her.mp3 */; };
 		782A87031BAFFA2A0027F192 /* LovingYou.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 782A86FF1BAFFA2A0027F192 /* LovingYou.mp3 */; };
 		782A87041BAFFA2A0027F192 /* TheRain.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 782A87001BAFFA2A0027F192 /* TheRain.mp3 */; };
@@ -76,7 +75,6 @@
 		782A86F71BAFDFC60027F192 /* MyNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNavigationController.m; sourceTree = "<group>"; };
 		782A86F91BAFF9390027F192 /* TranslucentNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranslucentNavigationBar.h; sourceTree = "<group>"; };
 		782A86FA1BAFF9390027F192 /* TranslucentNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TranslucentNavigationBar.m; sourceTree = "<group>"; };
-		782A86FD1BAFFA2A0027F192 /* 3girls.m4r */ = {isa = PBXFileReference; lastKnownFileType = file; path = 3girls.m4r; sourceTree = "<group>"; };
 		782A86FE1BAFFA2A0027F192 /* Her.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Her.mp3; sourceTree = "<group>"; };
 		782A86FF1BAFFA2A0027F192 /* LovingYou.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = LovingYou.mp3; sourceTree = "<group>"; };
 		782A87001BAFFA2A0027F192 /* TheRain.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TheRain.mp3; sourceTree = "<group>"; };
@@ -204,7 +202,6 @@
 		782A86FC1BAFFA2A0027F192 /* Musics */ = {
 			isa = PBXGroup;
 			children = (
-				782A86FD1BAFFA2A0027F192 /* 3girls.m4r */,
 				782A86FE1BAFFA2A0027F192 /* Her.mp3 */,
 				782A86FF1BAFFA2A0027F192 /* LovingYou.mp3 */,
 				782A87001BAFFA2A0027F192 /* TheRain.mp3 */,
@@ -547,7 +544,6 @@
 				78F370961B9D1CE000CA5BE7 /* Images.xcassets in Resources */,
 				78298D3D1BB0DC200062D77E /* example-rss-feed.xml in Resources */,
 				782A87041BAFFA2A0027F192 /* TheRain.mp3 in Resources */,
-				782A87011BAFFA2A0027F192 /* 3girls.m4r in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

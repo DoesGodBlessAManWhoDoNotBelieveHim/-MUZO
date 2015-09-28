@@ -8,7 +8,10 @@
 
 #import "PlayListViewController.h"
 
-@interface PlayListViewController ()
+
+@interface PlayListViewController (){
+    NSArray *dataSources;
+}
 
 @end
 
@@ -17,6 +20,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"播放列表";
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"searchdevice_back"] style:UIBarButtonItemStylePlain target:self action:@selector(dismiss)];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:15/255.0 green:15/255.0 blue:15/255.0 alpha:1];
+    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:15/255.0 green:15/255.0 blue:15/255.0 alpha:1];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    dataSources = @[@"The Rain",@"Loving You",@"Her"];
+
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return dataSources.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MyCell"];
+    cell.textLabel.text = dataSources[indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (_delegate) {
+        [_delegate didSelectedIndex:indexPath.row];
+    }
+    [self dismiss];
+}
+
+- (void)dismiss{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
