@@ -83,32 +83,53 @@
 - (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent;
 @end
 
+
+
 @implementation ViewController
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
-    
+- (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent
+{
+    if (receivedEvent.type == UIEventTypeRemoteControl) {
+        switch (receivedEvent.subtype) {
+            case UIEventSubtypeRemoteControlPause: /* FALLTHROUGH */
+            case UIEventSubtypeRemoteControlPlay:  /* FALLTHROUGH */
+            case UIEventSubtypeRemoteControlTogglePlayPause:{
+                [self.audionController pause];
+            }
+                
+                break;
+            case UIEventSubtypeRemoteControlNextTrack:{
+                [self.audionController playNextItem];
+            }
+                break;
+            case UIEventSubtypeRemoteControlPreviousTrack:{
+                [self.audionController playPreviousItem];
+            }
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 注册通知
+//    [NSNotificationCenter defaultCenter]addObserver:self selector:@selector() name:<#(NSString *)#> object:<#(id)#>
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    
     NSURL *rainMp3Url = [[NSBundle mainBundle]URLForResource:@"TheRain" withExtension:@"mp3"];
     NSURL *LYMp3Url = [[NSBundle mainBundle]URLForResource:@"LovingYou" withExtension:@"mp3"];
     NSURL *HERMp3Url = [[NSBundle mainBundle]URLForResource:@"Her" withExtension:@"mp3"];
-    allUrls = @[rainMp3Url,LYMp3Url,HERMp3Url];
+    NSURL *netUrl = [NSURL URLWithString:@"http://cdn.y.baidu.com/yinyueren/data2/music/50943/ZmJsaGhkpKhkcauXpJqcdZSXlGtoaGlqkmpomZlnaGuWapWVmJydapaWZJmYZ5mZl2hjlmWXnW9oZJmWmGZobTE$/50943.mp3?xcode=cea73222a85ed113e8bacff2ed1ec1baf60b0af772fbc015"];
+    allUrls = @[netUrl,rainMp3Url,LYMp3Url,HERMp3Url];
     
     self.myVolumeView.showsVolumeSlider = NO;
     self.preSongBtn.hidden = YES;
     
     self.stationUrl = nil;
-    
+#pragma mark - onStateChange
     __weak ViewController *weakSelf = self;
     self.audionController.onStateChange = ^(FSAudioStreamState state){
         switch (state) {
@@ -204,7 +225,7 @@
                 break;
         }
     };
-    
+    #pragma mark - onFailure
     self.audionController.onFailure=^(FSAudioStreamError error, NSString *errorDescription){
         NSString *errorCategory;
         switch (error) {
