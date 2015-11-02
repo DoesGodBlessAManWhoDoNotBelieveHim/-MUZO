@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+#import "OpenUDID.h"
+
 
 @interface AppDelegate ()
 
@@ -18,6 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    NSLog(@"UUID:%@",[OpenUDID value]);
     
     [[UIApplication sharedApplication]registerForRemoteNotifications];
     

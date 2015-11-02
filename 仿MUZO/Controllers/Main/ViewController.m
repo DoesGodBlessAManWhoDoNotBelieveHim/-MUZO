@@ -122,7 +122,7 @@
     NSURL *rainMp3Url = [[NSBundle mainBundle]URLForResource:@"TheRain" withExtension:@"mp3"];
     NSURL *LYMp3Url = [[NSBundle mainBundle]URLForResource:@"LovingYou" withExtension:@"mp3"];
     NSURL *HERMp3Url = [[NSBundle mainBundle]URLForResource:@"Her" withExtension:@"mp3"];
-    NSURL *netUrl = [NSURL URLWithString:@"http://cdn.y.baidu.com/yinyueren/data2/music/50943/ZmJsaGhkpKhkcauXpJqcdZSXlGtoaGlqkmpomZlnaGuWapWVmJydapaWZJmYZ5mZl2hjlmWXnW9oZJmWmGZobTE$/50943.mp3?xcode=cea73222a85ed113e8bacff2ed1ec1baf60b0af772fbc015"];
+    NSURL *netUrl = [NSURL URLWithString:@"http://i.y.qq.com/s.plcloud/fcgi-bin/fcg_yqq_song_detail_info_cp.fcg?songmid=003ULL5o2D7UMu"];
     allUrls = @[netUrl,rainMp3Url,LYMp3Url,HERMp3Url];
     
     self.myVolumeView.showsVolumeSlider = NO;

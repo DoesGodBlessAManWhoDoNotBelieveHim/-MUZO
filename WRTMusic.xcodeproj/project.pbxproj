@@ -60,6 +60,7 @@
 		78D653F51B9ED7BC00268C1A /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D653E41B9ED7BC00268C1A /* UIWebView+AFNetworking.m */; };
 		78D653F71B9ED8F800268C1A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78D653F61B9ED8F800268C1A /* Security.framework */; };
 		78D653F91B9ED90400268C1A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78D653F81B9ED90400268C1A /* SystemConfiguration.framework */; };
+		78E3890A1BCF48C0006E6C3F /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 78E389091BCF48C0006E6C3F /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		78F370881B9D1CE000CA5BE7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F370871B9D1CE000CA5BE7 /* main.m */; };
 		78F3708B1B9D1CE000CA5BE7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 78F3708A1B9D1CE000CA5BE7 /* AppDelegate.m */; };
 		78F3708E1B9D1CE000CA5BE7 /* _MUZO.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 78F3708C1B9D1CE000CA5BE7 /* _MUZO.xcdatamodeld */; };
@@ -167,6 +168,8 @@
 		78D653E41B9ED7BC00268C1A /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		78D653F61B9ED8F800268C1A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		78D653F81B9ED90400268C1A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		78E389081BCF48C0006E6C3F /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
+		78E389091BCF48C0006E6C3F /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		78F370821B9D1CE000CA5BE7 /* WRTMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WRTMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78F370861B9D1CE000CA5BE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		78F370871B9D1CE000CA5BE7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -355,6 +358,15 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		78E389071BCF48B8006E6C3F /* OpenUDID */ = {
+			isa = PBXGroup;
+			children = (
+				78E389081BCF48C0006E6C3F /* OpenUDID.h */,
+				78E389091BCF48C0006E6C3F /* OpenUDID.m */,
+			);
+			path = OpenUDID;
+			sourceTree = "<group>";
+		};
 		78F370791B9D1CE000CA5BE7 = {
 			isa = PBXGroup;
 			children = (
@@ -411,6 +423,7 @@
 		78F370AF1B9D1EB700CA5BE7 /* 第三方库 */ = {
 			isa = PBXGroup;
 			children = (
+				78E389071BCF48B8006E6C3F /* OpenUDID */,
 				784A12171BB4E0B600921371 /* SVProgressHUD */,
 				78D653BD1B9ED7BC00268C1A /* AFNetworkingFramework */,
 				786B39571B9E808D0062FABF /* FreeStreamer */,
@@ -505,6 +518,7 @@
 				TargetAttributes = {
 					78F370811B9D1CE000CA5BE7 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 28M9L5HYL8;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -583,6 +597,7 @@
 				786B39891B9E808D0062FABF /* http_stream.cpp in Sources */,
 				78D653F11B9ED7BC00268C1A /* UIButton+AFNetworking.m in Sources */,
 				78F370B81B9D1EB700CA5BE7 /* ViewController.m in Sources */,
+				78E3890A1BCF48C0006E6C3F /* OpenUDID.m in Sources */,
 				78D653F31B9ED7BC00268C1A /* UIProgressView+AFNetworking.m in Sources */,
 				786B398E1B9E808D0062FABF /* FSAudioStream.mm in Sources */,
 				786B39941B9E808D0062FABF /* Reachability.m in Sources */,
@@ -708,6 +723,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/仿MUZO/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
@@ -726,6 +742,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/仿MUZO/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
